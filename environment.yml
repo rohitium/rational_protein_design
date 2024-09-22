@@ -1,0 +1,10 @@
+name: rational_protein_design
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - biopython
+  - numpy
+  - pip
+  - pip:
+      - setuptools
