@@ -14,13 +14,6 @@ A Python package for rational protein binder design using Biopython.
 - [Contributing](#contributing)
 - [License](#license)
 
-## Features
-
-- Parse PDB files and extract chains
-- Identify neighboring residues based on distance thresholds
-- Extract protein sequences and generate rational binders
-- Support for randomization and multiple design attempts
-
 ## Installation
 
 You can install the package from PyPI:
@@ -44,6 +37,46 @@ designer = BinderDesigner(
 )
 designer.design_binder("output_fasta_file.fasta")
 ```
+
+## Features
+
+- Parse PDB files and extract chains
+- Identify neighboring residues based on distance thresholds
+- Extract protein sequences and generate rational binders
+- Support for randomization and multiple design attempts
+
+## Contributing
+
+We welcome contributions! Here's how you can help:
+
+### Reporting Bugs
+
+- Search existing issues to avoid duplicates.
+- Open a new issue and provide detailed information.
+
+### Feature Requests
+
+- Open an issue with the tag `enhancement`.
+
+### Code Contributions
+
+- Fork the repository.
+- Create a new branch for your feature or bugfix.
+- Write clear, concise commit messages.
+- Submit a pull request.
+
+### Coding Standards
+
+- Follow PEP 8 style guidelines.
+- Write docstrings for all public methods and classes.
+- Include unit tests for new features or bug fixes.
+
+### Testing
+
+- Run existing tests with `python -m unittest discover tests`.
+- Add tests for your contributions.
+
+Thank you for contributing!
 
 ## License
 
