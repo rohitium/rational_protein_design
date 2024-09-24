@@ -17,17 +17,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
+
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v2
       with:
+        auto-update-conda: true
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        environment-file: environment.yml
+        activate-environment: rational_protein_design
+
     - name: Install package
       run: |
         pip install .
+
     - name: Run tests
       run: |
         python -m unittest discover tests
