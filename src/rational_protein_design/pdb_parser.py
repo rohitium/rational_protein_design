@@ -3,7 +3,7 @@ from Bio.PDB import PDBParser
 
 class PDBParserWrapper:
     def __init__(self, pdb_file):
-        self.parser = PDBParser(QUIET=True)
+        self.parser = PDBParser(QUIET=True, PERMISSIVE=False)
         self.structure, self.pdb_id = self.parse_pdb_file(pdb_file)
 
     def parse_pdb_file(self, pdb_file):

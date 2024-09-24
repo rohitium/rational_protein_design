@@ -1,4 +1,4 @@
-# src/__init__.py
+# src/rational_protein_design/__init__.py
 
 from .pdb_parser import PDBParserWrapper
 from .neighbor_finder import NeighborFinder

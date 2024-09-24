@@ -1,5 +1,8 @@
+# src/rational_protein_design/binder_designer.py
+
 import random
 from Bio import SeqIO
+from Bio.PDB import Selection
 from .pdb_parser import PDBParserWrapper
 from .neighbor_finder import NeighborFinder
 from .sequence_extractor import SequenceExtractor
@@ -21,7 +24,8 @@ class BinderDesigner:
         target_chain = parser.get_chain(self.chain_id)
         neighbor_chain = parser.get_chain(self.neighbor_chain_id)
 
-        target_residues = parser.get_target_residues(target_chain, *self.target_residues_range)
+        start_residue, end_residue = self.target_residues_range
+        target_residues = parser.get_target_residues(target_chain, start_residue, end_residue)
         target_atoms = Selection.unfold_entities(target_residues, 'A')
 
         distance_threshold = random.uniform(1.0, self.max_distance / 2)
@@ -41,11 +45,15 @@ class BinderDesigner:
         if neighbor_resids_list:
             selected_range = random.choice(neighbor_resids_list)
             min_residue_id, max_residue_id = selected_range
-            sequence_residues = [residue for residue in neighbor_chain if min_residue_id <= residue.get_id() <= max_residue_id]
+            sequence_residues = [
+                residue for residue in neighbor_chain
+                if min_residue_id <= residue.get_id() <= max_residue_id
+            ]
 
+            # Adjust sequence length to N
             sequence_residues = SequenceExtractor.adjust_sequence_length(sequence_residues, neighbor_chain, self.N)
             if sequence_residues:
-                return SequenceExtractor.create_sequence_record(neighbor_chain, sequence_residues, parser.pdb_id, self.neighbor_chain_id)
+                return SequenceExtractor.create_sequence_record(sequence_residues, parser.pdb_id, self.neighbor_chain_id)
         return None
 
     def design_binder(self, output_fasta):
@@ -58,7 +66,8 @@ class BinderDesigner:
             attempts += 1
             if seq_record:
                 sequence_str = str(seq_record.seq)
-                if sequence_str not in unique_sequences:
+                seq_id = seq_record.id
+                if sequence_str not in unique_sequences and seq_id not in [rec.id for rec in seq_records]:
                     unique_sequences.add(sequence_str)
                     seq_records.append(seq_record)
 

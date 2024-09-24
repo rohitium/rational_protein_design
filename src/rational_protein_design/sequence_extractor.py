@@ -1,3 +1,5 @@
+# src/rational_protein_design/sequence_extractor.py
+
 from Bio.SeqUtils import seq1
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -5,13 +7,13 @@ import random
 
 class SequenceExtractor:
     @staticmethod
-    def create_sequence_record(neighbor_chain, sequence_residues, pdb_id, neighbor_chain_id):
-        sequence = ''.join([seq1(residue.get_resname()) for residue in sequence_residues])
-        residue_ids = [residue.get_id() for residue in sequence_residues]
-
+    def create_sequence_record(sequence_residues, pdb_id, neighbor_chain_id):
+        sequence = ''.join([seq1(residue.get_resname()) for residue in sequence_residues]) 
+        residue_ids = [residue.id for residue in sequence_residues]
+        
         min_residue_id = residue_ids[0]
         max_residue_id = residue_ids[-1]
-
+        
         min_resseq, min_icode = min_residue_id[1], min_residue_id[2].strip()
         max_resseq, max_icode = max_residue_id[1], max_residue_id[2].strip()
 

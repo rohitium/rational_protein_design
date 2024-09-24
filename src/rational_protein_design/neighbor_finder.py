@@ -1,3 +1,5 @@
+# src/rational_protein_design/neighbor_finder.py
+
 from Bio.PDB import NeighborSearch, Selection
 
 class NeighborFinder:
@@ -12,15 +14,15 @@ class NeighborFinder:
 
     @staticmethod
     def get_contiguous_residue_ids(residue_ids):
+        residue_ids = sorted(residue_ids, key=lambda x: (x[1], x[2]))
         ranges = []
-        start = residue_ids[0]
-        prev = residue_ids[0]
+        start = prev = residue_ids[0]
         for residue_id in residue_ids[1:]:
-            if residue_id[1] == prev[1] + 1 and residue_id[2] == ' ':
+            # Check for contiguous residues considering insertion codes
+            if residue_id[1] == prev[1] + 1 and residue_id[2] == prev[2]:
                 prev = residue_id
             else:
                 ranges.append((start, prev))
-                start = residue_id
-                prev = residue_id
+                start = prev = residue_id
         ranges.append((start, prev))
         return ranges
