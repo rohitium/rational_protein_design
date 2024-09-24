@@ -1,6 +1,18 @@
 # Rational Protein Design
 
-This package is designed for rational protein binder design using Biopython data structures. It allows for efficient identification and extraction of protein sequences based on proximity to target residues in a protein structure.
+[![Build Status](https://github.com/rohitium/rational_protein_design/actions/workflows/ci.yml/badge.svg)](https://github.com/rohitium/rational_protein_design/actions)
+[![PyPI version](https://badge.fury.io/py/rational_protein_design.svg)](https://badge.fury.io/py/rational_protein_design)
+[![License](https://img.shields.io/github/license/rohitium/rational_protein_design)](LICENSE)
+
+A Python package for rational protein binder design using Biopython.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
